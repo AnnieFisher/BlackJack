@@ -6,16 +6,19 @@ public class GameConsole {
 	Deck deck = new Deck();
 	Player player;
 	Player dealer;
-	String answer;
+	String response;
 	Scanner kb = new Scanner(System.in);
 
 	public void displayMenu() {
 		System.out.println("Welcome to the BlackJack Table");
 		System.out.println("To play: Type Begin \nTo quit: Type Q");
-		String answer = kb.next();
-		if (answer.equalsIgnoreCase("Begin")) {
+		String response = kb.next();
+		if (response.equalsIgnoreCase("Begin")) {
 			enterPlayerName();
-		} else if (answer.equalsIgnoreCase("q")) {
+		} else if (response.equalsIgnoreCase("q")) {
+			System.exit(0);
+		} else {
+			System.err.println("Unknown what to proceed with, please enter game again");
 			System.exit(0);
 		}
 	}
@@ -27,26 +30,6 @@ public class GameConsole {
 		System.out.println("Im excited you are joining us " + name + "! Let's Play!!!\n");
 	}
 
-	public void deal() {
-		String name = "keyboard";
-		Player player = new Player(name);
-		Player dealer = new Player("dealer");
-
-		deck.shuffle();
-		dealer.hand.addCard(deck.dealCard());
-		deck.removeCard(deck.dealCard());
-		player.hand.addCard(deck.dealCard());
-		deck.removeCard(deck.dealCard());
-		dealer.hand.addCard(deck.dealCard());
-		deck.removeCard(deck.dealCard());
-		player.hand.addCard(deck.dealCard());
-		deck.removeCard(deck.dealCard());
-		dealer.hand.displayHand();
-		System.out.println("Dealer's hand value: " + dealer.hand.getValue());
-		player.hand.displayHand();
-		System.out.println("Your hand value: " + player.hand.getValue());
-	}
-
 	public void Play() {
 
 		String name = "keyboard";
@@ -56,6 +39,7 @@ public class GameConsole {
 		int dealerVal = dealer.hand.getValue();
 
 		deck.shuffle();
+
 		dealer.hand.addCard(deck.dealCard());
 		deck.removeCard(deck.dealCard());
 		player.hand.addCard(deck.dealCard());
